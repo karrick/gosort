@@ -12,32 +12,29 @@ func heapsort(values []int) {
 	for i := 1; i < lv; i++ {
 		debug("\ti: %d\n", i)
 
-		// Inside is O(log n), bubbling up new value while it is smaller than
-		// its parent value.
-		var bubbleIndex = i
-		newValue := values[bubbleIndex]
-		debug("\tbubbleIndex: %v; value: %v\n", bubbleIndex, newValue)
+		// Inside is O(log n), bubbling up new value while it is larger than its
+		// parent.
+		j := i
+		v := values[j]
+		debug("\tbubbleIndex: %v; value: %v\n", j, v)
 
-		for {
-			parentIndex := (bubbleIndex - 1) >> 1
+		for j > 0 {
+			parentIndex := (j - 1) >> 1
 			parentValue := values[parentIndex]
 			debug("\tparent index: %v\n\tparent value: %v\n", parentIndex, parentValue)
 
-			if newValue < parentValue {
+			if v < parentValue {
 				debug("\tcannot bubble above a larger value\n")
 				break
 			}
 
-			values[bubbleIndex] = parentValue // move parent value down
-			bubbleIndex = parentIndex         // next iteration look at parent position
-
-			if parentIndex == 0 {
-				debug("\talready bubbled all the way up\n")
-				break
-			}
+			values[j] = parentValue // move parent value down
+			j = parentIndex         // next iteration look at parent position
 		}
 
-		values[bubbleIndex] = newValue
+		if j != i {
+			values[j] = v
+		}
 	}
 	// POST: values is a max-heap where no child has a value greater than its
 	// parent.
@@ -51,7 +48,6 @@ func heapsort(values []int) {
 		// Swap first and final element.
 		t := values[i]
 		values[i] = values[0]
-		// values[0] = t
 
 		// Re-establish max-heap property by sinking t until not greater than
 		// parent.
@@ -67,7 +63,7 @@ func heapsort(values []int) {
 			right := left + 1
 
 			if right < i {
-				if vr := values[right]; vr > vl {
+				if vr := values[right]; vl < vr {
 					if vr < t {
 						debug("\tvr < t (%v < %v)\n", vr, t)
 						break
