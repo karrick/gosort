@@ -16,7 +16,7 @@ func heapsort(values []int) {
 		// parent.
 		j := i
 		v := values[j]
-		debug("\tbubbleIndex: %v; value: %v\n", j, v)
+		debug("\tj: %v; value: %v\n", j, v)
 
 		for j > 0 {
 			parentIndex := (j - 1) >> 1
@@ -39,8 +39,8 @@ func heapsort(values []int) {
 	// POST: values is a max-heap where no child has a value greater than its
 	// parent.
 
-	// STAGE 2: O(n) selection sort of largest element by walking heap to
-	// get largest value.
+	// STAGE 2: O(n) selection sort of largest element by walking heap to get
+	// largest value.
 	debug("stage 2: sort max heap: %v\n", values)
 
 	for i := lv - 1; i > 0; i-- {
