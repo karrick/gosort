@@ -26,5 +26,7 @@ func ensureIntSlicesMatch(tb testing.TB, actual, expected []int) {
 			}
 		}
 	}
-	tb.Log(actual)
+	if tb.Failed() {
+		tb.Log(actual)
+	}
 }
