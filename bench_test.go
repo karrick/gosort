@@ -48,27 +48,35 @@ func Benchmark1K(b *testing.B) {
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
 }
 
+func Benchmark2500(b *testing.B) {
+	const count = 2500
+	b.Run("heap", func(b *testing.B) { benchSort(b, heapsort, count) })
+	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
+	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
+	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+}
+
 func Benchmark5K(b *testing.B) {
 	const count = 5000
 	b.Run("heap", func(b *testing.B) { benchSort(b, heapsort, count) })
-	b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
-	b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
+	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
+	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
 }
 
 func Benchmark7500(b *testing.B) {
 	const count = 7500
 	b.Run("heap", func(b *testing.B) { benchSort(b, heapsort, count) })
-	b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
-	b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
+	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
+	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
 }
 
 func Benchmark10K(b *testing.B) {
 	const count = 10000
 	b.Run("heap", func(b *testing.B) { benchSort(b, heapsort, count) })
-	b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
-	b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
+	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
+	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
 }
 

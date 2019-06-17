@@ -8,7 +8,5 @@ At 10 integers, insertion sort (2) is most efficient.
 
 At 100 integers, insertion sort (3) is most efficient.
 
-At about 5k integers, insertion sort (3) is slightly faster than heap
-sort.
-
-At about 7500, heap sort is more efficient than insertion sort (3).
+Somewhere between 1k and 10k integers, depending on the architecture
+and OS, heap sort is more efficient than insertion sort (3).
