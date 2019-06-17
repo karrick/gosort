@@ -1,7 +1,9 @@
 package gosort
 
 import (
+	"flag"
 	"math/rand"
+	"os"
 	"testing"
 )
 
@@ -306,6 +308,40 @@ func TestInsertion3(t *testing.T) {
 	})
 }
 
+func TestSearchLeftMostGreaterThan(t *testing.T) {
+	t.Run("simple", func(t *testing.T) {
+		if got, want := searchLeftMostGreaterThan(0, []int{0, 1, 2, 3, 4, 5, 6}), 1; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(1, []int{0, 1, 2, 3, 4, 5, 6}), 2; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(2, []int{0, 1, 2, 3, 4, 5, 6}), 3; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(3, []int{0, 1, 2, 3, 4, 5, 6}), 4; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(4, []int{0, 1, 2, 3, 4, 5, 6}), 5; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(5, []int{0, 1, 2, 3, 4, 5, 6}), 6; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(6, []int{0, 1, 2, 3, 4, 5, 6}), 7; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+		if got, want := searchLeftMostGreaterThan(7, []int{0, 1, 2, 3, 4, 5, 6}), 7; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+	})
+	t.Run("with a run", func(t *testing.T) {
+		if got, want := searchLeftMostGreaterThan(3, []int{0, 1, 2, 3, 3, 3, 6}), 6; got != want {
+			t.Errorf("GOT: %v; WANT: %v", got, want)
+		}
+	})
+}
+
 func TestInsertion4(t *testing.T) {
 	t.Run("empty", func(t *testing.T) {
 		var values []int
@@ -412,7 +448,12 @@ func TestInsertion4(t *testing.T) {
 	})
 }
 
-func BenchmarkInsertion1(b *testing.B) {
+var randomValues []int
+var sortedValues []int
+
+func TestMain(m *testing.M) {
+	flag.Parse()
+
 	var max int
 	if testing.Short() {
 		max = 100
@@ -420,104 +461,48 @@ func BenchmarkInsertion1(b *testing.B) {
 		max = 1000
 	}
 
+	randomValues = rand.Perm(max)
+
+	sortedValues = make([]int, max)
+	for i := 0; i < max; i++ {
+		sortedValues[i] = i
+	}
+
+	os.Exit(m.Run())
+}
+
+func BenchmarkInsertion1(b *testing.B) {
 	for j := 0; j < b.N; j++ {
-		want := make([]int, max)
-		for i := 0; i < max; i++ {
-			want[i] = i
-		}
-		values := rand.Perm(max) // generate a randomized list
+		values := make([]int, len(randomValues))
+		copy(values, randomValues)
 		insertionsort1(values)
-		ensureIntSlicesMatch(b, values, want)
+		ensureIntSlicesMatch(b, values, sortedValues)
 	}
 }
 
 func BenchmarkInsertion2(b *testing.B) {
-	var max int
-	if testing.Short() {
-		max = 100
-	} else {
-		max = 1000
-	}
-
 	for j := 0; j < b.N; j++ {
-		want := make([]int, max)
-		for i := 0; i < max; i++ {
-			want[i] = i
-		}
-		values := rand.Perm(max) // generate a randomized list
+		values := make([]int, len(randomValues))
+		copy(values, randomValues)
 		insertionsort2(values)
-		ensureIntSlicesMatch(b, values, want)
+		ensureIntSlicesMatch(b, values, sortedValues)
 	}
 }
 
 func BenchmarkInsertion3(b *testing.B) {
-	var max int
-	if testing.Short() {
-		max = 100
-	} else {
-		max = 1000
-	}
-
 	for j := 0; j < b.N; j++ {
-		want := make([]int, max)
-		for i := 0; i < max; i++ {
-			want[i] = i
-		}
-		values := rand.Perm(max) // generate a randomized list
+		values := make([]int, len(randomValues))
+		copy(values, randomValues)
 		insertionsort3(values)
-		ensureIntSlicesMatch(b, values, want)
+		ensureIntSlicesMatch(b, values, sortedValues)
 	}
 }
 
 func BenchmarkInsertion4(b *testing.B) {
-	var max int
-	if testing.Short() {
-		max = 100
-	} else {
-		max = 1000
-	}
-
 	for j := 0; j < b.N; j++ {
-		want := make([]int, max)
-		for i := 0; i < max; i++ {
-			want[i] = i
-		}
-		values := rand.Perm(max) // generate a randomized list
+		values := make([]int, len(randomValues))
+		copy(values, randomValues)
 		insertionsort4(values)
-		ensureIntSlicesMatch(b, values, want)
+		ensureIntSlicesMatch(b, values, sortedValues)
 	}
-}
-
-func TestSearchLeftMostGreaterThan(t *testing.T) {
-	t.Run("simple", func(t *testing.T) {
-		if got, want := searchLeftMostGreaterThan(0, []int{0, 1, 2, 3, 4, 5, 6}), 1; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(1, []int{0, 1, 2, 3, 4, 5, 6}), 2; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(2, []int{0, 1, 2, 3, 4, 5, 6}), 3; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(3, []int{0, 1, 2, 3, 4, 5, 6}), 4; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(4, []int{0, 1, 2, 3, 4, 5, 6}), 5; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(5, []int{0, 1, 2, 3, 4, 5, 6}), 6; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(6, []int{0, 1, 2, 3, 4, 5, 6}), 7; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-		if got, want := searchLeftMostGreaterThan(7, []int{0, 1, 2, 3, 4, 5, 6}), 7; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-	})
-	t.Run("with a run", func(t *testing.T) {
-		if got, want := searchLeftMostGreaterThan(3, []int{0, 1, 2, 3, 3, 3, 6}), 6; got != want {
-			t.Errorf("GOT: %v; WANT: %v", got, want)
-		}
-	})
 }
