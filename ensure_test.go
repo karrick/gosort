@@ -2,7 +2,6 @@ package gosort
 
 import "testing"
 
-//     testSort(t, heapsort, values, nil)
 func testSort(tb testing.TB, sorter func([]int), actual, expected []int) {
 	tb.Helper()
 	sorter(actual)

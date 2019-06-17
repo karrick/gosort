@@ -48,43 +48,6 @@ func insertionsort2(values []int) {
 	}
 }
 
-func insertionsort3(values []int) {
-	lv := len(values)
-
-	for i := 1; i < lv; i++ {
-		// Insert the i'th value into the sorted list from index 0 to i-1.
-		v := values[i]
-
-		if !(v < values[i-1]) {
-			continue
-		}
-
-		// binary search for insertion position
-		lo := 0
-		hi := i - 1
-
-		for lo <= hi {
-			m := (lo + hi) >> 1
-			vm := values[m]
-			if v < vm {
-				hi = m - 1
-			} else if vm < v {
-				lo = m + 1
-			} else {
-				break
-			}
-		}
-		// POST: lo is index of insertion
-
-		for !(v < values[lo]) {
-			lo++
-		}
-
-		copy(values[lo+1:i+1], values[lo:i+1])
-		values[lo] = v
-	}
-}
-
 func searchLeftMostGreaterThan(v int, values []int) int {
 	lo := 0
 	hi := len(values) - 1
@@ -99,7 +62,7 @@ func searchLeftMostGreaterThan(v int, values []int) int {
 	return lo
 }
 
-func insertionsort4(values []int) {
+func insertionsort3(values []int) {
 	lv := len(values)
 
 	for i := 1; i < lv; i++ {
