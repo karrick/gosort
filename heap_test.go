@@ -98,3 +98,9 @@ func TestHeap(t *testing.T) {
 		}
 	})
 }
+
+func BenchmarkHeap(b *testing.B) {
+	b.Run("100", func(b *testing.B) { benchSort(b, heapsort, 100) })
+	b.Run("1000", func(b *testing.B) { benchSort(b, heapsort, 1000) })
+	b.Run("10000", func(b *testing.B) { benchSort(b, heapsort, 10000) })
+}

@@ -1,9 +1,7 @@
 package gosort
 
 import (
-	"flag"
 	"math/rand"
-	"os"
 	"testing"
 )
 
@@ -448,61 +446,26 @@ func TestInsertion4(t *testing.T) {
 	})
 }
 
-var randomValues []int
-var sortedValues []int
-
-func TestMain(m *testing.M) {
-	flag.Parse()
-
-	var max int
-	if testing.Short() {
-		max = 100
-	} else {
-		max = 1000
-	}
-
-	randomValues = rand.Perm(max)
-
-	sortedValues = make([]int, max)
-	for i := 0; i < max; i++ {
-		sortedValues[i] = i
-	}
-
-	os.Exit(m.Run())
-}
-
 func BenchmarkInsertion1(b *testing.B) {
-	for j := 0; j < b.N; j++ {
-		values := make([]int, len(randomValues))
-		copy(values, randomValues)
-		insertionsort1(values)
-		ensureIntSlicesMatch(b, values, sortedValues)
-	}
+	b.Run("100", func(b *testing.B) { benchSort(b, insertionsort1, 100) })
+	b.Run("1000", func(b *testing.B) { benchSort(b, insertionsort1, 1000) })
+	b.Run("10000", func(b *testing.B) { benchSort(b, insertionsort1, 10000) })
 }
 
 func BenchmarkInsertion2(b *testing.B) {
-	for j := 0; j < b.N; j++ {
-		values := make([]int, len(randomValues))
-		copy(values, randomValues)
-		insertionsort2(values)
-		ensureIntSlicesMatch(b, values, sortedValues)
-	}
+	b.Run("100", func(b *testing.B) { benchSort(b, insertionsort2, 100) })
+	b.Run("1000", func(b *testing.B) { benchSort(b, insertionsort2, 1000) })
+	b.Run("10000", func(b *testing.B) { benchSort(b, insertionsort2, 10000) })
 }
 
 func BenchmarkInsertion3(b *testing.B) {
-	for j := 0; j < b.N; j++ {
-		values := make([]int, len(randomValues))
-		copy(values, randomValues)
-		insertionsort3(values)
-		ensureIntSlicesMatch(b, values, sortedValues)
-	}
+	b.Run("100", func(b *testing.B) { benchSort(b, insertionsort3, 100) })
+	b.Run("1000", func(b *testing.B) { benchSort(b, insertionsort3, 1000) })
+	b.Run("10000", func(b *testing.B) { benchSort(b, insertionsort3, 10000) })
 }
 
 func BenchmarkInsertion4(b *testing.B) {
-	for j := 0; j < b.N; j++ {
-		values := make([]int, len(randomValues))
-		copy(values, randomValues)
-		insertionsort4(values)
-		ensureIntSlicesMatch(b, values, sortedValues)
-	}
+	b.Run("100", func(b *testing.B) { benchSort(b, insertionsort4, 100) })
+	b.Run("1000", func(b *testing.B) { benchSort(b, insertionsort4, 1000) })
+	b.Run("10000", func(b *testing.B) { benchSort(b, insertionsort4, 10000) })
 }
