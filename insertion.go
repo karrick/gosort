@@ -64,7 +64,7 @@ func insertionsort3(values []int) {
 			continue // optimization for pre-sorted lists
 		}
 
-		// lo := searchLeftMostGreaterThan(v, values[:i-1])
+		// lo := searchLeftMostGreaterThan(v, values[:hi)
 		lo := 0
 		for lo <= hi {
 			m := (lo + hi) >> 1
