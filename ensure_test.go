@@ -2,6 +2,13 @@ package gosort
 
 import "testing"
 
+//     testSort(t, heapsort, values, nil)
+func testSort(tb testing.TB, sorter func([]int), actual, desired []int) {
+	tb.Helper()
+	sorter(actual)
+	ensureIntSlicesMatch(tb, actual, desired)
+}
+
 func ensureIntSlicesMatch(tb testing.TB, actual, expected []int) {
 	tb.Helper()
 
