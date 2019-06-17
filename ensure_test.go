@@ -3,10 +3,10 @@ package gosort
 import "testing"
 
 //     testSort(t, heapsort, values, nil)
-func testSort(tb testing.TB, sorter func([]int), actual, desired []int) {
+func testSort(tb testing.TB, sorter func([]int), actual, expected []int) {
 	tb.Helper()
 	sorter(actual)
-	ensureIntSlicesMatch(tb, actual, desired)
+	ensureIntSlicesMatch(tb, actual, expected)
 }
 
 func ensureIntSlicesMatch(tb testing.TB, actual, expected []int) {
@@ -22,12 +22,11 @@ func ensureIntSlicesMatch(tb testing.TB, actual, expected []int) {
 	}
 
 	for i := 0; i < l; i++ {
-		switch {
-		case i > la:
+		if i >= la {
 			tb.Errorf("%d: WANT: %v (missing)", i, expected[i])
-		case i > lb:
+		} else if i >= lb {
 			tb.Errorf("%d: GOT: %v (extra)", i, actual[i])
-		default:
+		} else {
 			if got, want := actual[i], expected[i]; got != want {
 				tb.Errorf("%d: GOT: %v; WANT: %v", i, got, want)
 			}
