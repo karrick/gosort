@@ -4,16 +4,18 @@ package gosort
 func heapsort(values []int) {
 	lv := len(values)
 
-	// STAGE 1: re-order elements to satisfy the heap property by creating a max
+	// STAGE 1: Re-order elements to satisfy the heap property by creating a max
 	// heap, where no child has a greater value than its parent.
 	debug("stage 1: build max heap: %v\n", values)
 
-	// Outside loop is O(n), and we can skip first item.
+	// Outside loop is O(n), and we can skip first item because it is already
+	// sorted when in a list by itself.
 	for i := 1; i < lv; i++ {
 		debug("\ti: %d\n", i)
 
-		// Inside is O(log n), bubbling up new value while it is larger than its
-		// parent.
+		// Inside loop is O(log n), bubbling up new value while it is larger
+		// than its parent, but since these elements are sorted in a heap, it
+		// only needs to bubble up a max of log n times rather than n.
 		j := i
 		v := values[j]
 		debug("\tj: %v; value: %v\n", j, v)
@@ -39,18 +41,22 @@ func heapsort(values []int) {
 	// POST: values is a max-heap where no child has a value greater than its
 	// parent.
 
-	// STAGE 2: O(n) selection sort of largest element by walking heap to get
-	// largest value.
+	// STAGE 2: The first element in the max heap is the largest item in the
+	// list.  Iteratively take the first element and place it at the end of the
+	// list, re-balance the heap, and then shrink the list by one element.
 	debug("stage 2: sort max heap: %v\n", values)
 
+	// Outside loop is O(n), where we take the first and largest element in the
+	// max heap, place it at the end of the list, then use a loop to re-balance
+	// the list.
 	for i := lv - 1; i > 0; i-- {
 
 		// Swap first and final element.
-		t := values[i]
-		values[i] = values[0]
+		t := values[i]        // save final element
+		values[i] = values[0] // move largest element into final position
 
-		// Re-establish max-heap property by sinking t until not greater than
-		// parent.
+		// Find a new home for the saved final element by walking down the max
+		// heap until it is smaller than some other element.
 		j := 0
 		for {
 			left := j<<1 + 1
