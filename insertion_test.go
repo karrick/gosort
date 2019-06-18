@@ -6,61 +6,63 @@ import (
 )
 
 func TestInsertion1(t *testing.T) {
+	sorter := insertionsort1
+
 	t.Run("empty", func(t *testing.T) {
 		var values []int
-		testSort(t, insertionsort1, values, nil)
+		testSort(t, sorter, values, nil)
 	})
 
 	t.Run("a", func(t *testing.T) {
 		values := []int{13}
-		testSort(t, insertionsort1, values, []int{13})
+		testSort(t, sorter, values, []int{13})
 	})
 
 	t.Run("two", func(t *testing.T) {
 		t.Run("ab", func(t *testing.T) {
 			values := []int{13, 42}
-			testSort(t, insertionsort1, values, []int{13, 42})
+			testSort(t, sorter, values, []int{13, 42})
 		})
 		t.Run("ba", func(t *testing.T) {
 			values := []int{42, 13}
-			testSort(t, insertionsort1, values, []int{13, 42})
+			testSort(t, sorter, values, []int{13, 42})
 		})
 	})
 
 	t.Run("three", func(t *testing.T) {
 		t.Run("abc", func(t *testing.T) {
 			values := []int{13, 42, 97}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("bca", func(t *testing.T) {
 			values := []int{42, 97, 13}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("cab", func(t *testing.T) {
 			values := []int{97, 13, 42}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("acb", func(t *testing.T) {
 			values := []int{13, 97, 42}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("cba", func(t *testing.T) {
 			values := []int{97, 42, 13}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("bac", func(t *testing.T) {
 			values := []int{42, 13, 97}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("acb", func(t *testing.T) {
 			values := []int{13, 97, 42}
-			testSort(t, insertionsort1, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 	})
 
 	t.Run("ten", func(t *testing.T) {
 		values := []int{9, 4, 2, 6, 8, 0, 3, 1, 7, 5}
-		testSort(t, insertionsort1, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+		testSort(t, sorter, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 	})
 
 	t.Run("randomized", func(t *testing.T) {
@@ -80,72 +82,74 @@ func TestInsertion1(t *testing.T) {
 			}
 
 			values := rand.Perm(max) // generate a randomized list
-			testSort(t, insertionsort1, values, want)
+			testSort(t, sorter, values, want)
 		}
 	})
 }
 
 func TestInsertion2(t *testing.T) {
+	sorter := insertionsort2
+
 	t.Run("empty", func(t *testing.T) {
 		var values []int
-		testSort(t, insertionsort2, values, nil)
+		testSort(t, sorter, values, nil)
 	})
 
 	t.Run("a", func(t *testing.T) {
 		values := []int{13}
-		testSort(t, insertionsort2, values, []int{13})
+		testSort(t, sorter, values, []int{13})
 	})
 
 	t.Run("two", func(t *testing.T) {
 		t.Run("ab", func(t *testing.T) {
 			values := []int{13, 42}
-			testSort(t, insertionsort2, values, []int{13, 42})
+			testSort(t, sorter, values, []int{13, 42})
 		})
 		t.Run("ba", func(t *testing.T) {
 			values := []int{42, 13}
-			testSort(t, insertionsort2, values, []int{13, 42})
+			testSort(t, sorter, values, []int{13, 42})
 		})
 	})
 
 	t.Run("three", func(t *testing.T) {
 		t.Run("abc", func(t *testing.T) {
 			values := []int{13, 42, 97}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("bca", func(t *testing.T) {
 			values := []int{42, 97, 13}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("cab", func(t *testing.T) {
 			values := []int{97, 13, 42}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("acb", func(t *testing.T) {
 			values := []int{13, 97, 42}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("cba", func(t *testing.T) {
 			values := []int{97, 42, 13}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("bac", func(t *testing.T) {
 			values := []int{42, 13, 97}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("acb", func(t *testing.T) {
 			values := []int{13, 97, 42}
-			testSort(t, insertionsort2, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 	})
 
 	t.Run("ten", func(t *testing.T) {
 		t.Run("unsorted", func(t *testing.T) {
 			values := []int{9, 4, 2, 6, 8, 0, 3, 1, 7, 5}
-			testSort(t, insertionsort2, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+			testSort(t, sorter, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		})
 		t.Run("sorted", func(t *testing.T) {
 			values := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-			testSort(t, insertionsort2, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+			testSort(t, sorter, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		})
 	})
 
@@ -166,76 +170,78 @@ func TestInsertion2(t *testing.T) {
 			}
 
 			values := rand.Perm(max) // generate a randomized list
-			testSort(t, insertionsort2, values, want)
+			testSort(t, sorter, values, want)
 		}
 	})
 }
 
 func TestInsertion3(t *testing.T) {
+	sorter := insertionsort3
+
 	t.Run("empty", func(t *testing.T) {
 		var values []int
-		testSort(t, insertionsort3, values, nil)
+		testSort(t, sorter, values, nil)
 	})
 
 	t.Run("a", func(t *testing.T) {
 		values := []int{13}
-		testSort(t, insertionsort3, values, []int{13})
+		testSort(t, sorter, values, []int{13})
 	})
 
 	t.Run("two", func(t *testing.T) {
 		t.Run("ab", func(t *testing.T) {
 			values := []int{13, 42}
-			testSort(t, insertionsort3, values, []int{13, 42})
+			testSort(t, sorter, values, []int{13, 42})
 		})
 		t.Run("ba", func(t *testing.T) {
 			values := []int{42, 13}
-			testSort(t, insertionsort3, values, []int{13, 42})
+			testSort(t, sorter, values, []int{13, 42})
 		})
 	})
 
 	t.Run("three", func(t *testing.T) {
 		t.Run("abc", func(t *testing.T) {
 			values := []int{13, 42, 97}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("bca", func(t *testing.T) {
 			values := []int{42, 97, 13}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("cab", func(t *testing.T) {
 			values := []int{97, 13, 42}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("acb", func(t *testing.T) {
 			values := []int{13, 97, 42}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("cba", func(t *testing.T) {
 			values := []int{97, 42, 13}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("bac", func(t *testing.T) {
 			values := []int{42, 13, 97}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 		t.Run("acb", func(t *testing.T) {
 			values := []int{13, 97, 42}
-			testSort(t, insertionsort3, values, []int{13, 42, 97})
+			testSort(t, sorter, values, []int{13, 42, 97})
 		})
 	})
 
 	t.Run("ten", func(t *testing.T) {
 		t.Run("unsorted", func(t *testing.T) {
 			values := []int{9, 4, 2, 6, 8, 0, 3, 1, 7, 5}
-			testSort(t, insertionsort3, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+			testSort(t, sorter, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		})
 		t.Run("partially sorted", func(t *testing.T) {
 			values := []int{0, 1, 2, 3, 5, 4, 6, 7, 8, 9}
-			testSort(t, insertionsort3, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+			testSort(t, sorter, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		})
 		t.Run("already sorted", func(t *testing.T) {
 			values := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
-			testSort(t, insertionsort3, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
+			testSort(t, sorter, values, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		})
 	})
 
@@ -256,7 +262,7 @@ func TestInsertion3(t *testing.T) {
 			}
 
 			values := rand.Perm(max) // generate a randomized list
-			testSort(t, insertionsort3, values, want)
+			testSort(t, sorter, values, want)
 		}
 	})
 }
