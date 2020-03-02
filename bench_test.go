@@ -30,6 +30,7 @@ func Benchmark10(b *testing.B) {
 	b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -39,6 +40,7 @@ func Benchmark100(b *testing.B) {
 	b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -48,6 +50,7 @@ func Benchmark1K(b *testing.B) {
 	b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -57,6 +60,7 @@ func Benchmark2500(b *testing.B) {
 	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -66,6 +70,7 @@ func Benchmark5K(b *testing.B) {
 	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -75,6 +80,7 @@ func Benchmark7500(b *testing.B) {
 	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -84,6 +90,7 @@ func Benchmark10K(b *testing.B) {
 	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -93,6 +100,7 @@ func Benchmark100K(b *testing.B) {
 	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	// b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
 
@@ -102,5 +110,6 @@ func Benchmark1M(b *testing.B) {
 	// b.Run("insertion1", func(b *testing.B) { benchSort(b, insertionsort1, count) })
 	// b.Run("insertion2", func(b *testing.B) { benchSort(b, insertionsort2, count) })
 	// b.Run("insertion3", func(b *testing.B) { benchSort(b, insertionsort3, count) })
+	b.Run("quick", func(b *testing.B) { benchSort(b, quick, count) })
 	b.Run("merge", func(b *testing.B) { benchSort(b, merge, count) })
 }
