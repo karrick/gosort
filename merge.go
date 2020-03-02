@@ -16,7 +16,6 @@ func mergeSplit(b, a []int, begin, end int) {
 	if end-begin < 2 {
 		return // single item is already sorted
 	}
-
 	middle := (begin + end) >> 1
 	mergeSplit(a, b, begin, middle)
 	mergeSplit(a, b, middle, end)
